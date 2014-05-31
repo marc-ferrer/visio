@@ -52,5 +52,8 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
-# IDE stuff
+# IDE stuff:
 .idea*
+
+# Project stuff:
+img/*
