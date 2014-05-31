@@ -1,0 +1,11 @@
+En aquesta pràctica heu de fer les següents tasques amb openCV:
+
+1.-Heu d'aprendre com funciona l'operació cvFindContours en OpenCV.
+Entregar un document en PDF de màxim dues pàgines explicant el més important.
+
+2.-Detectau els contorns de  (http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png)
+i dibuixau els contorns significatius (permetre definir un threshold)detectats sobre la mateixa imatge.
+Feis un realçament de contorns.
+
+3.-En una imatge on apareixin linies i formes circulas presentau un exemple
+de la transformada de Hough utilitzant cvHoughCircles i cvHoughLines2.

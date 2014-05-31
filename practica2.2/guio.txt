@@ -1,0 +1,8 @@
+En aquesta pràctica heu de fer les següents tasques amb openCV:
+
+1.-Obertura (Opening) i un Tancament (Closening) sobre una imatge.
+Documentau el codi explicant les passes fetes.
+
+2.-Intentau segmentar una imatge utilitzant Canny
+
+3- Amb els coneixements que tens ara com eliminaries el fons d'aquesta Imatge?

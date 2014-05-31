@@ -1,0 +1,4 @@
+Implementa amb OpenCV una aplicació que analitzi un video o que capturi imatges
+en temps real d'una càmera, i que quan apareixi la cara d'una persona reprodueixi el so d'una alarma.
+
+En OpenCV existeix una funcio que permet detectar/classificar cares de persones.
