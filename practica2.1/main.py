@@ -5,7 +5,7 @@ import cv2
 
 def main():
     """Main program"""
-    img = cv2.imread('./img/Lenna.png')
+    img = cv2.imread('../img/Lenna.png')
     imgray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     thresh = 100
     ret, thresh = cv2.threshold(imgray, thresh, 255, 0)
