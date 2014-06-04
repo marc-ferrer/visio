@@ -67,7 +67,7 @@ def cannyTrack(img):
         # vis /= 2
         vis[edge != 0] = (0, 255, 0)
         cv2.imshow('edge', edge)
-        key = cv2.waitKey()
+        key = cv2.waitKey(1)
         if key == 53:
             cv2.imwrite('../img/canny-Lena.png', edge)
             exit_canny = True
