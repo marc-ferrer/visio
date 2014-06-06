@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*-
 """face detecting using opencv"""
 import cv2
+import Tkinter
 # import video
 
 
@@ -18,6 +19,8 @@ def main():
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         # gray = cv2.equalizeHist(gray)
         faces = face_cascade.detectMultiScale(gray, 1.1, 5)
+        if faces != ():
+            Tkinter.Tk().bell()
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
         cv2.imshow('frame', frame)
