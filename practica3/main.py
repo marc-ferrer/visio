@@ -2,16 +2,17 @@
 # -*- coding: utf8 -*-
 """face detecting using opencv"""
 import cv2
-import Tkinter
-# import video
+import os
 
 
 def main():
     """Main function"""
     cap = cv2.VideoCapture(0)
-    detectorLocation = '../haarcascades/haarcascade_frontalface_default.xml'
-    face_cascade = cv2.CascadeClassifier(detectorLocation)
-    flags = cv2.cv.CV_HAAR_SCALE_IMAGE
+    direc = os.path.dirname(os.path.realpath(__file__))
+    root = os.path.split(direc)[0]
+    detector_location = '/haarcascades/haarcascade_frontalface_default.xml'
+    detector_location = root + detector_location
+    face_cascade = cv2.CascadeClassifier(detector_location)
     while True:
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -19,11 +20,10 @@ def main():
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         # gray = cv2.equalizeHist(gray)
         faces = face_cascade.detectMultiScale(gray, 1.1, 5)
-        if faces != ():
-            Tkinter.Tk().bell()
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
         cv2.imshow('frame', frame)
+        # Non blocking wait for Key.
         if cv2.waitKey(1) == ord('q'):
             break
     cap.release()

@@ -4,6 +4,7 @@
 __author__ = 'marc'
 import cv2
 import numpy
+import os
 
 
 def opening(img):
@@ -24,10 +25,10 @@ def closing(img):
     cv2.destroyAllWindows()
 
 
-def canny():
+def canny(img_source):
     """Apply canny edge detection"""
     # Remove the noise in the image
-    detected_edges = cv2.GaussianBlur(img, (5, 5), 0)
+    detected_edges = cv2.GaussianBlur(img_source, (5, 5), 0)
     edges = cv2.Canny(detected_edges, 60, 110, apertureSize=3)
     cv2.imshow('canny', edges)
     cv2.waitKey()
@@ -43,8 +44,10 @@ def print_menu(img):
     cv2.putText(img, text, (10, 80), font, 0.5, (255, 255, 255), 1, cv2.CV_AA)
     text = '3-> Canny edge detection'
     cv2.putText(img, text, (10, 120), font, 0.5, (255, 255, 255), 1, cv2.CV_AA)
-    text = 'q-> Quit'
+    text = '4-> Canny edge detection with a trackbar slide'
     cv2.putText(img, text, (10, 160), font, 0.5, (255, 255, 255), 1, cv2.CV_AA)
+    text = 'q-> Quit'
+    cv2.putText(img, text, (10, 200), font, 0.5, (255, 255, 255), 1, cv2.CV_AA)
     cv2.imshow('menu', img)
 
 
@@ -59,43 +62,45 @@ def cannyTrack(img):
     exit_canny = False
     while not exit_canny:
         detected_edges = cv2.GaussianBlur(img, (5, 5), 0)
-        gray = cv2.cvtColor(detected_edges, cv2.COLOR_BGR2GRAY)
         thrs1 = cv2.getTrackbarPos('thrs1', 'edge')
         thrs2 = cv2.getTrackbarPos('thrs2', 'edge')
         edge = cv2.Canny(detected_edges, thrs1, thrs2, apertureSize=3)
         vis = img.copy()
-        # vis /= 2
         vis[edge != 0] = (0, 255, 0)
         cv2.imshow('edge', edge)
         key = cv2.waitKey(1)
-        if key == 53:
-            cv2.imwrite('../img/canny-Lena.png', edge)
+        if key == ord('q'):
+            cv2.imwrite(ROOT+'/img/canny-Lena.png', edge)
             exit_canny = True
+            cv2.destroyAllWindows()
 
 
 def main():
     """Main function"""
-    img = cv2.imread('../img/Lenna.png')
+    img = cv2.imread(ROOT+'/img/Lenna.png')
     img_menu = numpy.copy(img)
-    print_menu(img_menu)
     # key = cv2.waitKey()
     # cv2.namedWindow('canny demo')
     # cv2.createTrackbar('Min threshold','canny demo',lowThreshold, max_lowThreshold, canny)
-    key = cv2.waitKey()
-    if key == 49:
-        opening(img)
-    elif key == 50:
-        closing(img)
-    elif key == 51:
-        canny()
-    elif key == 52:
-        cannyTrack(img)
+    cont = True
+    while cont:
+        print_menu(img_menu)
+        key = cv2.waitKey()
+        if key == ord('1'):
+            opening(img)
+        elif key == ord('2'):
+            closing(img)
+        elif key == ord('3'):
+            canny(img)
+        elif key == ord('4'):
+            cannyTrack(img)
+        elif key == ord('q'):
+            cont = False
 
     cv2.destroyAllWindows()
 
+DIREC = os.path.dirname(os.path.realpath(__file__))
+ROOT = os.path.split(DIREC)[0]
+
 if __name__ == "__main__":
-    # img = cv2.imread('../img/Lenna.png')
-    # lowThreshold = 0
-    # max_lowThreshold = 100
-    # ratio = 3
     main()
